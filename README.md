@@ -10,7 +10,6 @@ Agente de IA (Claude + tool use) que opera uma única conta fictícia com saldo 
 | `agente.py` | System prompt, schemas das ferramentas, loop de tool use, CLI |
 | `test_banco.py` | Testes determinísticos das regras (sem API) |
 | `test_agente.py` | Loop com cliente falso (sem API) + bateria com o modelo real (com API) |
-
 | `app.py` | Interface web (Streamlit) com saldo real e ferramentas chamadas visíveis |
 | `demo.py` | Roteiro automático com todos os casos obrigatórios, conferindo o saldo a cada passo |
 
