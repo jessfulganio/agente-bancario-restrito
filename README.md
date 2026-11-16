@@ -11,14 +11,28 @@ Agente de IA (Claude + tool use) que opera uma única conta fictícia com saldo 
 | `test_banco.py` | Testes determinísticos das regras (sem API) |
 | `test_agente.py` | Loop com cliente falso (sem API) + bateria com o modelo real (com API) |
 
+| `app.py` | Interface web (Streamlit) com saldo real e ferramentas chamadas visíveis |
+| `demo.py` | Roteiro automático com todos os casos obrigatórios, conferindo o saldo a cada passo |
+
 ## Como rodar
 
 ```bash
-pip install anthropic pytest
+pip install -r requirements.txt
 export ANTHROPIC_API_KEY=...
+streamlit run app.py      # interface web
+python demo.py            # demonstração automática no terminal
 python agente.py          # conversa no terminal
-pytest -q                 # todos os testes (os de modelo real só rodam com a chave)
+pytest -v                 # todos os testes (os de modelo real só rodam com a chave)
 ```
+
+### Publicar a interface (Streamlit Community Cloud, grátis)
+
+1. Entre em https://share.streamlit.io com a conta do GitHub.
+2. **Create app** → repositório `jessfulganio/agente-bancario-restrito`, branch `main`, arquivo `app.py`.
+3. Em **Advanced settings → Secrets**, cole: `ANTHROPIC_API_KEY = "sk-ant-..."`
+4. **Deploy**. O link gerado pode ser enviado para teste.
+
+Cada visitante recebe a própria conta (R$ 1.000,00). A sessão tem limite de 40 mensagens e 500 caracteres por mensagem para proteger o custo da chave; vale também definir um limite de gasto no console da Anthropic.
 
 Modelo padrão: `claude-sonnet-5-5` (troque com `MODELO_AGENTE=...`).
 
